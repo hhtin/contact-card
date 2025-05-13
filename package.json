@@ -6,9 +6,9 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxt preview --host 0.0.0.0",
     "postinstall": "nuxt prepare",
-    "start": "nuxt start"
+    "start": "nuxt preview --host 0.0.0.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
