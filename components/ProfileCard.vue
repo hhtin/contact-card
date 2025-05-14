@@ -43,7 +43,7 @@
         ]"
         @mouseenter="handleMouseEnter(social)"
         @mouseleave="handleMouseLeave(social)"
-        @click="social.copyable ? copyToClipboard(social.text, social.name) : null"
+        @click="social.isMomo? handleMomoClick(social.text):(social.copyable ? copyToClipboard(social.text, social.name) : null)"
       >
         <i :class="social.icon"></i> {{ socialTexts[social.name] }}
       </a>
@@ -97,6 +97,25 @@ export default {
           }, 2000);
         });
     },
+    handleMomoClick(phone) {
+      const momoDeepLink = `momo://?action=payWithPhone&phone=${phone}`
+      const momoWebLink = `https://nhantien.momo.vn/${phone}`
+
+      // Thử mở app trong tab mới
+      const newWindow = window.open(momoDeepLink, '_blank')
+
+      // Fallback: nếu không mở được app (vì không có handler momo://), sau 1s thì chuyển link tab đó sang QR
+      setTimeout(() => {
+        try {
+          if (newWindow && !newWindow.closed) {
+            newWindow.location.href = momoWebLink
+          }
+        } catch (e) {
+          // Nếu bị block thì mở mới lại
+          window.open(momoWebLink, '_blank')
+        }
+      }, 1000)
+    }
   },
 };
 </script>
