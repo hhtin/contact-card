@@ -43,7 +43,7 @@
         ]"
         @mouseenter="handleMouseEnter(social)"
         @mouseleave="handleMouseLeave(social)"
-        @click="social.isMomo? handleMomoClick(social.text):(social.copyable ? copyToClipboard(social.text, social.name) : null)"
+        @click="social.isMomo? handleMomoClick(social.phone):(social.copyable ? copyToClipboard(social.text, social.name) : null)"
       >
         <i :class="social.icon"></i> {{ socialTexts[social.name] }}
       </a>
